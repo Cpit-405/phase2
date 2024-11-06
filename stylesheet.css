@@ -16,7 +16,8 @@ p{
 p > a {
 color: #ade4cb;
 }
- .navbar {
+
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,18 +28,12 @@ color: #ade4cb;
     border: 0.3px solid #69818d;
     margin: 20px;
 }
-#userProfile{
-    margin-top: 10px;
-    color: #ade4cb;
 
-}
-
-.logo > a {
+.logo a {
     color: #d5f9e8;
-    font-size: 24px;
     text-decoration: none;
+    font-size: 24px;
     font-weight: bold;
-    
 }
 
 .navbar ul {
@@ -46,10 +41,11 @@ color: #ade4cb;
     margin: 0;
     padding: 0;
     display: flex;
+    align-items: center;
 }
 
 .navbar ul li {
-    display: inline-block;
+    position: relative;
     margin-left: 10px;
 }
 
@@ -61,9 +57,62 @@ color: #ade4cb;
 }
 
 .navbar ul li a:hover {
-   text-decoration: underline;
-   
+    text-decoration: underline;
 }
+
+.dropdown ul{
+    display: none;
+}
+.dropdown-menu {
+    box-shadow: 0 4px 8px rgba(232, 228, 228, 0.1);
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    background-color: #FAEDF0;
+    border-radius: 5px;
+    min-width: 120px;
+    z-index: 1;
+}
+
+.dropdown-menu li a {
+    padding: 10px;
+    color: #d5f9e8;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #555;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 150px;
+    padding: 5px 10px;
+    margin-top: 4px;
+    border: 0.5px solid #ccc;
+    border-radius: 13px;
+    font-size: 14px;
+}
+
+.searchbutton {
+    border: none;
+    margin-left: 3px;
+    background-color: transparent;
+    color: #d5f9e8;
+}
+
+
+
 /* -----END of NAVBAR---------------- */
 /* -----Section 1---------------- */
 .section1 {
