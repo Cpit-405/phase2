@@ -3,7 +3,9 @@
 <!--Hebah Alahmari - 2105304-->
 <!--Reem Alhussaini - 2105023-->
 <!--Lama Althabiti - 2112562-->
-
+<?php
+include '/Applications/MAMP/htdocs/Phase1-cpit405/Queries-405.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,15 +23,15 @@
     <!-- ------------navbar--------------------- -->
     <nav class="navbar"> 
         <div class="logo">
-            <a href="index.html">Retro Devices</a>
+            <a href="index.php">Retro Devices</a>
         </div>
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle">Devices</a>
                 <ul class="dropdown-menu">
-                    <li><a href="Sony.html">Sony</a></li>
+                    <li><a href="Sony.php">Sony</a></li>
                     <li><a href="Nintendo.html">Nintendo</a></li>
                     <li><a href="Atari.html">Atari</a></li>
                 </ul>
@@ -62,33 +64,30 @@
     </section>
   
       <!-- ------------2nd section--------------------- -->
-  
-        <section id ="category" class="categories">
-            <h2>Explore Our Categories</h2>
-            <div class="category-grid">
+
+      <section id="category" class="categories">
+    <h2>Explore Our Categories</h2>
+    <div class="category-grid">
+        <?php
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                ?>
                 <div class="category">
-                    <a href="Sony.html">  
-                    <img src="images\ps2.jpg" alt="Sony Devices">
-                    <h3>Sony Devices</h3>
-                </a>
-                    <p>Explore the classic and innovative devices from Sony.</p>
+                    <?php
+                    echo '<a href="' . $row['category_name'] . '.php">';
+                    echo '<img src="images/' . $row['img1'] . '" alt="' . $row['category_name'] . '">';
+                    echo '<h3>' . $row['category_name'] . '</h3>';
+                    echo '</a>';
+                    echo '<p>' . $row['shortDescription'] . '</p>';
+                    ?>
                 </div>
-                <div class="category">
-                    <a href="Nintendo.html"> 
-                    <img src="images\Nintendo-home.jpg" alt="Nintendo Devices"> 
-                    <h3>Nintendo Devices</h3>
-                </a>
-                    <p>Discover the beloved and iconic devices from Nintendo.</p>
-                </div>
-                <div class="category"><!-- add link to your page -->
-                    <a href="Atari.html"> 
-                    <img src="images\Atari2600-home.jpg" alt="Atari Devices"> <!-- Replace with your image -->
-                    <h3>Atari Devices</h3>
-                </a>
-                    <p>Find other classic devices from various brands.</p>
-                </div>
-            </div>
-        </section>
+                <?php
+            }
+        }
+        ?>
+    </div> 
+</section>
+   
 
       <!-- ------------3rd section--------------------- -->
 
