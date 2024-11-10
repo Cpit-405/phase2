@@ -40,7 +40,7 @@ include '/Applications/MAMP/htdocs/phase2-cpit470/Queries-405.php';
 
         <li>
             <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search...">
+                <input type="text" id="search-bar" class="search-input" placeholder="Type / to search">
                 <button class="searchbutton"><i class="bi bi-search"></i></button>
             </div>
         </li>
@@ -89,10 +89,11 @@ if ($resultAtaripage->num_rows > 0) {
             $current_device_name = $row['device_name'];
             $index++;
         }
-
-        echo "<div class='image-container'>";
-        echo "<img src='images/" . $row['game_image'] . "' alt='" . $row['game_name'] . "'>";
-        echo "<p>" . $row['game_name'] . "</p></div>";
+        if (!empty($row['game_name'])) {
+            echo "<div class='image-container'>";
+            echo "<img src='images/" . $row['game_image'] . "' alt='" . $row['game_name'] . "'>";
+            echo "<p>" . $row['game_name'] . "</p></div>";
+        }
     }
 
     echo "</td></tr></tbody></table>";

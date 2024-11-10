@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheet.css">
-   <script src="/scripts.js"></script>
+   <script src="scripts.js"></script>
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -39,40 +39,45 @@
     
             <li>
                 <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Search...">
+                    <input type="text" id="search-bar" class="search-input" placeholder="Type / to search">
                     <button class="searchbutton"><i class="bi bi-search"></i></button>
                 </div>
             </li>
         </ul>
     </nav>
 
-        <section id="signUp" class="form-section">
-            <h2 style="text-align: center;">Sign up</h2>
-            <form class="form-form"  action="process_signUp.php" method="POST" novalidate>
+    <section id="signUp" class="form-section">
+        <h2 style="text-align: center;">Sign up</h2>
+            <form class="form-form" action="process_signUp.php" method="POST" novalidate>
                 <?php if (isset($_GET['error'])) { ?>
                     <p class="error"> <?php echo $_GET['error']; ?> </p>
                 <?php } ?> 
+
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="form-group">
-                    <label for="password confirmation">Repeat password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" required> 
+                    <input type="email" id="email" name="email" required oninput="validateEmail()">
+                    <span id="email-feedback"></span>
                 </div>
                 
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required oninput="validatePasswordStrength()">
+                    <span id="password-feedback"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password_confirmation">Repeat password:</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required oninput="validatePasswordConfirmation()">
+                    <span id="password-confirmation-feedback"></span>
+                </div>
 
                 <div class="form-actions">
-                  <button  class="button" type="submit">Sign Up</button>
+                    <button class="button" type="submit">Sign Up</button>
                 </div>
             </form>
+        <p>Have an account already? <a href="Login.php">Login</a>.</p>
+</section>
 
-            <p>Have an account already? <a href="Login.php">Login</a>.</p>
-        </section>
 
         
      

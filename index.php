@@ -45,7 +45,7 @@ include '/Applications/MAMP/htdocs/phase2-cpit470/Queries-405.php';
     
             <li>
                 <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Search...">
+                    <input type="text" id="search-bar" class="search-input" placeholder="Type / to search">
                     <button class="searchbutton"><i class="bi bi-search"></i></button>
                 </div>
             </li>

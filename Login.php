@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "";
 $dbname = "Retro_devices";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -82,7 +82,7 @@ $conn->close();
             </li>
             <li>
                 <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Search...">
+                    <input type="text" id="search-bar" class="search-input" placeholder="Type / to search">
                     <button class="searchbutton"><i class="bi bi-search"></i></button>
                 </div>
             </li>

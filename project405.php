@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "";
 $dbname = "Retro_devices";
 
 // Step 1: Create a connection to the MySQL server (without specifying a database)
