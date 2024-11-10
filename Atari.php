@@ -1,5 +1,5 @@
 <?php
-include '/Applications/MAMP/htdocs/Phase1-cpit405/Queries-405.php';
+include '/Applications/MAMP/htdocs/phase2-cpit470/Queries-405.php';
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +35,7 @@ include '/Applications/MAMP/htdocs/Phase1-cpit405/Queries-405.php';
 
         <li><a href="#feedback">Feedback</a></li>
         <li id="userProfile">
-            <a href="Login.html#login"><i class="bi bi-person-circle"></i></a>
+            <a href="Login.php#login"><i class="bi bi-person-circle"></i></a>
         </li>
 
         <li>
@@ -87,12 +87,12 @@ if ($resultAtaripage->num_rows > 0) {
             echo "<tbody><tr><td colspan='4'>";
             
             $current_device_name = $row['device_name'];
+            $index++;
         }
 
         echo "<div class='image-container'>";
         echo "<img src='images/" . $row['game_image'] . "' alt='" . $row['game_name'] . "'>";
         echo "<p>" . $row['game_name'] . "</p></div>";
-        $index++;
     }
 
     echo "</td></tr></tbody></table>";

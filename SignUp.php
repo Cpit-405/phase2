@@ -18,23 +18,23 @@
     <!-- ------------navbar--------------------- -->
     <nav class="navbar"> 
         <div class="logo">
-            <a href="index.html">Retro Devices</a>
+            <a href="index.php">Retro Devices</a>
         </div>
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle">Devices</a>
                 <ul class="dropdown-menu">
-                    <li><a href="Sony.html">Sony</a></li>
-                    <li><a href="Nintendo.html">Nintendo</a></li>
-                    <li><a href="Atari.html">Atari</a></li>
+                    <li><a href="Sony.php">Sony</a></li>
+                    <li><a href="Nintendo.php">Nintendo</a></li>
+                    <li><a href="Atari.php">Atari</a></li>
                 </ul>
             </li>
     
             <li><a href="#feedback">Feedback</a></li>
             <li id="userProfile">
-                <a href="Login.html#login"><i class="bi bi-person-circle"></i></a>
+                <a href="Login.php#login"><i class="bi bi-person-circle"></i></a>
             </li>
     
             <li>
@@ -46,9 +46,12 @@
         </ul>
     </nav>
 
-        <section id="login" class="form-section">
+        <section id="signUp" class="form-section">
             <h2 style="text-align: center;">Sign up</h2>
-            <form class="form-form"  action="process_login.php" method="POST">
+            <form class="form-form"  action="process_signUp.php" method="POST" novalidate>
+                <?php if (isset($_GET['error'])) { ?>
+                    <p class="error"> <?php echo $_GET['error']; ?> </p>
+                <?php } ?> 
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" required>
@@ -57,12 +60,18 @@
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
                 </div>
+                <div class="form-group">
+                    <label for="password confirmation">Repeat password</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required> 
+                </div>
+                
+
                 <div class="form-actions">
-                  <button  class="button" type="submit">Login</button>
+                  <button  class="button" type="submit">Sign Up</button>
                 </div>
             </form>
 
-            <p>Have an account already? <a href="Login.html">Login</a>.</p>
+            <p>Have an account already? <a href="Login.php">Login</a>.</p>
         </section>
 
         

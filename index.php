@@ -4,7 +4,8 @@
 <!--Reem Alhussaini - 2105023-->
 <!--Lama Althabiti - 2112562-->
 <?php
-include '/Applications/MAMP/htdocs/Phase1-cpit405/Queries-405.php';
+include '/Applications/MAMP/htdocs/phase2-cpit470/project405.php';
+include '/Applications/MAMP/htdocs/phase2-cpit470/Queries-405.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +17,7 @@ include '/Applications/MAMP/htdocs/Phase1-cpit405/Queries-405.php';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheet.css">
-   <script src="/scripts.js"></script>
+   <script src="scripts.js"></script>
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
@@ -32,14 +33,14 @@ include '/Applications/MAMP/htdocs/Phase1-cpit405/Queries-405.php';
                 <a href="#" class="dropdown-toggle">Devices</a>
                 <ul class="dropdown-menu">
                     <li><a href="Sony.php">Sony</a></li>
-                    <li><a href="Nintendo.html">Nintendo</a></li>
-                    <li><a href="Atari.html">Atari</a></li>
+                    <li><a href="Nintendo.php">Nintendo</a></li>
+                    <li><a href="Atari.php">Atari</a></li>
                 </ul>
             </li>
     
             <li><a href="#feedback">Feedback</a></li>
             <li id="userProfile">
-                <a href="Login.html#login"><i class="bi bi-person-circle"></i></a>
+                <a href="Login.php#login"><i class="bi bi-person-circle"></i></a>
             </li>
     
             <li>
