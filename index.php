@@ -196,12 +196,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
            
             if (!empty($errors)) {
-                echo "<div style='text-align: left;'>"; // Ensure the errors are not centered
-                echo "<ul style='margin-top:-4px; padding-left: 20px; list-style-type: disc;'>"; // Remove extra space and add bullets
+                echo "<div style='color: red; text-align: left;'>"; 
                 foreach ($errors as $error) {
-                    echo "<li style='color: red;'>" . htmlspecialchars($error) . "</li>";
+                    echo htmlspecialchars($error) . "<br>"; 
                 }
-                echo "</ul>";
                 echo "</div>";
             }
             ?>

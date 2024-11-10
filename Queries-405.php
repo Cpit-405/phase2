@@ -84,7 +84,7 @@ $resultAtaripage = $conn->query($sqlAtariPage);
 // queries ADD, delete and update -
 // - --------- add device to sony ------------------------
 // $sqlAddDevice = "INSERT INTO SonyDevice (device_name, description, image_url) VALUES 
-//               ('Handheld Game Console', 'The RG35XX is an amazing budget retro gaming handheld that plays many of your favourite classic consoles. The RG35XX features the Actions ATM7039S quad-core processor running up to 1.6GHz with a quad-core PowerVR SGX544MP GPU. Combined, they provide enough performance for all 4th-generation gaming consoles and some newer ones. The retro gaming handheld comes with 256MB DDR3 RAM, which is more than enough for the OS and emulator for the gaming consoles it supports. The 3.5\" IPS display runs at a 640x480 resolution at a 4:3 aspect ratio, which is perfect for retro gaming.', '3Device.jpg')";
+//               ('Handheld Console', 'The RG35XX is an amazing budget retro gaming handheld that plays many of your favourite classic consoles. The RG35XX features the Actions ATM7039S quad-core processor running up to 1.6GHz with a quad-core PowerVR SGX544MP GPU. Combined, they provide enough performance for all 4th-generation gaming consoles and some newer ones. The retro gaming handheld comes with 256MB DDR3 RAM, which is more than enough for the OS and emulator for the gaming consoles it supports. The 3.5\" IPS display runs at a 640x480 resolution at a 4:3 aspect ratio, which is perfect for retro gaming.', '3Device.jpg')";
 
 // if (!$conn->query($sqlAddDevice) === TRUE) {
 //        die("Error: " . $conn->error);
