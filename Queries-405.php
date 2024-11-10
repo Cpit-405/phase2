@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 $dbname = "Retro_devices";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

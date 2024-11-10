@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 $dbname = "Retro_devices";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -111,7 +111,7 @@ $conn->close();
         </form>
 
         <p>Don't have an account? <a href="SignUp.php">Sign up here</a>.</p>
-        <p><a href="resetpassword.html">Forgot Password?</a></p>
+        <p><a href="resetpassword.php">Forgot Password?</a></p>
     </section>
 
     <footer class="footer">
