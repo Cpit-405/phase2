@@ -164,20 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2>Feedback</h2>
 
         <form class="feedback-form" id="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '#feedback'; ?>" method="POST">
-
-
-            <!-- Display success or error messages -->
-        <?php
-        if (!empty($errors)) {
-            echo "<div>";
-            foreach ($errors as $error) {
-                echo "<p>" . htmlspecialchars($error) . "</p>";
-            }
-            echo "</div>";
-        } elseif (!empty($success_message)) {
-            echo "<div>" . htmlspecialchars($success_message) . "</div>";
-        }
-        ?>
+       
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" onfocus="focusFunction(id)" onblur="blurFunction(id)"  value="<?php echo htmlspecialchars($name); ?>">
@@ -199,6 +186,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="message">Message</label>
                 <textarea id="message" name="message" rows="4" onfocus="focusFunction(id)" onblur="blurFunction(id)" ><?php echo htmlspecialchars($message); ?></textarea>
             </div>
+                     
+            <!-- Display success or error messages -->
+
+           <?php 
+           
+             if (!empty($success_message)) {
+                echo "<div style='color:green;'>" . htmlspecialchars($success_message) . "</div>";
+            }
+           
+            if (!empty($errors)) {
+                echo "<div style='text-align: left;'>"; // Ensure the errors are not centered
+                echo "<ul style='margin-top:-4px; padding-left: 20px; list-style-type: disc;'>"; // Remove extra space and add bullets
+                foreach ($errors as $error) {
+                    echo "<li style='color: red;'>" . htmlspecialchars($error) . "</li>";
+                }
+                echo "</ul>";
+                echo "</div>";
+            }
+            ?>
             <div class="form-actions">
                 <button type="submit" class="submit-button">Submit Feedback</button>
                 <button type="reset" class="reset-button">Reset</button>

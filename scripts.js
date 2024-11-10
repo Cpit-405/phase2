@@ -2,11 +2,11 @@
 // a: add Focus on form fields
 function focusFunction(id) {
     if(id == "name"){
-        document.getElementById(id).placeholder = "Enter your name";  
+        document.getElementById(id).placeholder = "John";  
        
     }
     if(id == "email"){
-        document.getElementById(id).placeholder = "Enter your Email";   
+        document.getElementById(id).placeholder = "emaple@example.com";   
     }
     if(id == "message"){
         document.getElementById(id).placeholder = "Feel Free to write your feedback!"; 
@@ -96,22 +96,32 @@ focusSearchOnSlash();
 
 
 // c: add Confirmation to form submition
-function init(){
-var form = document.getElementById("form");
-if(form == null){
-    console.log("Form is null")
-}
-form.addEventListener("submit", function(){
-        return confirm ("Are You Sure You Want To Send Your Feedback?");
-    }, false );
-    
-form.addEventListener("reset", 
-        function(){
-            return confirm ("Are You Sure You Want To reset the form?");
-        }, false );
-    
+function init() {
+    var form = document.getElementById("form");
+    if (form) {
+        form.addEventListener("submit", function(event) {
+            var isConfirmed = confirm("Are You Sure You Want To Send Your Feedback?");
+            if (!isConfirmed) {
+                event.preventDefault(); 
+            }
+        });
 
- }
- window.onload = function() {
-    init();
-};
+        form.addEventListener("reset", function(event) {
+            var isConfirmed = confirm("Are you sure you want to reset the form?");
+            if (!isConfirmed) {
+                event.preventDefault();
+            } else {
+                document.getElementById("name").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("feedback-type").value = "";
+                document.getElementById("message").value = "";
+            }
+        });
+    } else {
+        console.log("Form element not found!");
+    }
+}
+
+// Ensure init is only called once the page loads
+window.addEventListener("load", init, false);
+
