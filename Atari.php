@@ -69,7 +69,6 @@ include '/Applications/MAMP/htdocs/phase2-cpit470/Queries-405.php';
 
 $current_device_name = '';
 if ($resultAtaripage->num_rows > 0) {
-    // Loop through the result set
     $index = 1;
     while ($row =$resultAtaripage->fetch_assoc()) {
         
@@ -89,12 +88,13 @@ if ($resultAtaripage->num_rows > 0) {
             $current_device_name = $row['device_name'];
             $index++;
         }
+        if (!empty($row['game_name'])) {
 
-        echo "<div class='image-container'>";
-        echo "<img src='images/" . $row['game_image'] . "' alt='" . $row['game_name'] . "'>";
-        echo "<p>" . $row['game_name'] . "</p></div>";
+            echo "<div class='image-container'>";
+            echo "<img src='images/" . $row['game_image'] . "' alt='" . $row['game_name'] . "'>";
+            echo "<p>" . $row['game_name'] . "</p></div>";
     }
-
+    }
     echo "</td></tr></tbody></table>";
 } 
 
