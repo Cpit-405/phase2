@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "";
 $dbname = "Retro_devices";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -93,22 +93,23 @@ $conn->close();
     <section id="login" class="form-section">
         <h2 style="text-align: center;">Login</h2>
         
-        <form class="form-form" method="POST">
-        <?php if ($is_invalid): ?>
-            <em>Invalid Login </em>
-        <?php endif; ?>
+        <form class="form-form" id="login-form" oninput="checkFormValidity('login-form', 'login-submit')" method="POST">
+            <?php if ($is_invalid): ?>
+                <em>Invalid Login</em>
+            <?php endif; ?>
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="password" required>
             </div>
             <div class="form-actions">
-                <button class="button" type="submit">Login</button>
+                <button class="button" id="login-submit" type="submit" disabled>Login</button>
             </div>
         </form>
+
 
         <p>Don't have an account? <a href="SignUp.php">Sign up here</a>.</p>
         <p><a href="resetpassword.php">Forgot Password?</a></p>

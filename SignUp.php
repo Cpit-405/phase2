@@ -48,33 +48,31 @@
 
     <section id="signUp" class="form-section">
         <h2 style="text-align: center;">Sign up</h2>
-            <form class="form-form" action="process_signUp.php" method="POST" novalidate>
-                <?php if (isset($_GET['error'])) { ?>
-                    <p class="error"> <?php echo $_GET['error']; ?> </p>
-                <?php } ?> 
+        <form class="form-form" id="signup-form" oninput="checkFormValidity('signup-form', 'signup-submit')" method="POST">
+            <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" name="email" required oninput="validateEmail('signup-email', 'signup-email-feedback')">
+                <span id="signup-email-feedback"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required 
+                    oninput="validatePassword('password', 'password_confirmation', 'password-feedback', 'password-confirmation-feedback')">
+                <span id="password-feedback"></span>
+            </div>
+            <div class="form-group">
+                <label for="password_confirmation">Confirm Password:</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" required 
+                    oninput="validatePassword('password', 'password_confirmation', 'password-feedback', 'password-confirmation-feedback')">
+                <span id="password-confirmation-feedback"></span>
+            </div>
 
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required oninput="validateEmail()">
-                    <span id="email-feedback"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required oninput="validatePasswordStrength()">
-                    <span id="password-feedback"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password_confirmation">Repeat password:</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" required oninput="validatePasswordConfirmation()">
-                    <span id="password-confirmation-feedback"></span>
-                </div>
+            <div class="form-actions">
+                <button type="submit" id="signup-submit" class="button" disabled>Sign Up</button>
+                <button type="reset" class="button">Reset</button>
+            </div>
+        </form>
 
-                <div class="form-actions">
-                    <button class="button" type="submit">Sign Up</button>
-                </div>
-            </form>
         <p>Have an account already? <a href="Login.php">Login</a>.</p>
 </section>
 

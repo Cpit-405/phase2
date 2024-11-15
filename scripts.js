@@ -33,48 +33,64 @@ function blurFunction(id) {
     }
 }
 
-// Function to validate email format
-function validateEmail() {
-    const emailField = document.getElementById("email");
-    const emailFeedback = document.getElementById("email-feedback");
+// Validate email format
+function validateEmail(emailFieldId, feedbackId) {
+    const emailField = document.getElementById(emailFieldId);
+    const emailFeedback = document.getElementById(feedbackId);
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (emailPattern.test(emailField.value)) {
-        emailFeedback.textContent = "Valid email address";
-        emailFeedback.style.color = "green";
-    } else {
-        emailFeedback.textContent = "Invalid email format";
-        emailFeedback.style.color = "red";
+    if (emailField && emailFeedback) {
+        if (emailPattern.test(emailField.value)) {
+            emailFeedback.textContent = "Valid email address";
+            emailFeedback.style.color = "green";
+            emailField.setCustomValidity(""); // Clear custom validity
+        } else {
+            emailFeedback.textContent = "Invalid email format";
+            emailFeedback.style.color = "red";
+            emailField.setCustomValidity("Invalid email format"); // Set custom validity
+        }
     }
 }
 
-// Function to validate password strength
-function validatePasswordStrength() {
-    const passwordField = document.getElementById("password");
-    const passwordFeedback = document.getElementById("password-feedback");
+
+function validatePassword(passwordId, confirmPasswordId, strengthFeedbackId, matchFeedbackId) {
+    const passwordField = document.getElementById(passwordId);
+    const confirmPasswordField = document.getElementById(confirmPasswordId);
+    const strengthFeedback = document.getElementById(strengthFeedbackId);
+    const matchFeedback = document.getElementById(matchFeedbackId);
+
     const strongPasswordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
+    // Validate password strength
     if (strongPasswordPattern.test(passwordField.value)) {
-        passwordFeedback.textContent = "Strong password";
-        passwordFeedback.style.color = "green";
+        strengthFeedback.textContent = "Strong password";
+        strengthFeedback.style.color = "green";
+        passwordField.setCustomValidity(""); // Clear custom validity
     } else {
-        passwordFeedback.textContent = "Weak password: use 8+ characters, including uppercase, number, and special character.";
-        passwordFeedback.style.color = "red";
+        strengthFeedback.textContent = "Weak password: use 8+ characters, including uppercase, number, and special character.";
+        strengthFeedback.style.color = "red";
+        passwordField.setCustomValidity("Weak password");
+    }
+
+    // Validate password confirmation
+    if (confirmPasswordField.value === passwordField.value) {
+        matchFeedback.textContent = "Passwords match";
+        matchFeedback.style.color = "green";
+        confirmPasswordField.setCustomValidity(""); // Clear custom validity
+    } else {
+        matchFeedback.textContent = "Passwords do not match";
+        matchFeedback.style.color = "red";
+        confirmPasswordField.setCustomValidity("Passwords do not match");
     }
 }
 
-// Function to confirm password matching
-function validatePasswordConfirmation() {
-    const passwordField = document.getElementById("password");
-    const confirmPasswordField = document.getElementById("password_confirmation");
-    const passwordFeedback = document.getElementById("password-confirmation-feedback");
+// Check form validity and enable/disable submit button
+function checkFormValidity(formId, submitButtonId) {
+    const form = document.getElementById(formId);
+    const submitButton = document.getElementById(submitButtonId);
 
-    if (confirmPasswordField.value === passwordField.value) {
-        passwordFeedback.textContent = "Passwords match";
-        passwordFeedback.style.color = "green";
-    } else {
-        passwordFeedback.textContent = "Passwords do not match";
-        passwordFeedback.style.color = "red";
+    if (form && submitButton) {
+        submitButton.disabled = !form.checkValidity(); // Enable if the form is valid, disable otherwise
     }
 }
 
@@ -95,33 +111,30 @@ function focusSearchOnSlash() {
 focusSearchOnSlash();
 
 
-// c: add Confirmation to form submition
+// Confirmation on form submission and reset
 function init() {
-    var form = document.getElementById("form");
+    const form = document.getElementById("feedback-form");
+    const submitButton = document.getElementById("feedback-submit");
+
     if (form) {
         form.addEventListener("submit", function(event) {
-            var isConfirmed = confirm("Are You Sure You Want To Send Your Feedback?");
+            const isConfirmed = confirm("Are You Sure You Want To Send Your Feedback?");
             if (!isConfirmed) {
-                event.preventDefault(); 
+                event.preventDefault();
             }
         });
 
         form.addEventListener("reset", function(event) {
-            var isConfirmed = confirm("Are you sure you want to reset the form?");
+            const isConfirmed = confirm("Are you sure you want to reset the form?");
             if (!isConfirmed) {
                 event.preventDefault();
             } else {
-                document.getElementById("name").value = "";
-                document.getElementById("email").value = "";
-                document.getElementById("feedback-type").value = "";
-                document.getElementById("message").value = "";
+                document.getElementById("feedback-email-feedback").textContent = ""; // Clear feedback messages
             }
         });
-    } else {
-        console.log("Form element not found!");
     }
 }
 
-// Ensure init is only called once the page loads
-window.addEventListener("load", init, false);
+// Initialize validation logic on page load
+window.addEventListener("load", init);
 

@@ -1,5 +1,5 @@
 <?php
-include('/Applications/MAMP/htdocs/phase2-cpit470/Queries-405.php');
+include'/Queries-405.php';
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +11,7 @@ include('/Applications/MAMP/htdocs/phase2-cpit470/Queries-405.php');
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheet.css">
+    <script src="scripts.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
