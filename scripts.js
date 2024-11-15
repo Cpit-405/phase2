@@ -133,6 +133,29 @@ function init() {
             }
         });
     }
+    // For signup form
+    const signupForm = document.getElementById("signup-form");
+    const signupSubmitButton = document.getElementById("signup-submit");
+
+    if (signupForm) {
+        signupForm.addEventListener("submit", function(event) {
+            const isConfirmed = confirm("Do you want to proceed with the signup?");
+            if (!isConfirmed) {
+                event.preventDefault();
+            }
+        });
+
+        signupForm.addEventListener("reset", function(event) {
+            const isConfirmed = confirm("Are you sure you want to reset the signup form?");
+            if (!isConfirmed) {
+                event.preventDefault();
+            } else {
+                document.getElementById("password-feedback").textContent = ""; // Clear password feedback
+                document.getElementById("password-confirmation-feedback").textContent = ""; // Clear password confirmation feedback
+                document.getElementById("signup-email-feedback").textContent = ""; // Clear email feedback
+            }
+        });
+    }
 }
 
 // Initialize validation logic on page load
