@@ -57,7 +57,7 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheet.css">
-    <script src="/scripts.js"></script>
+    <script src="scripts.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
@@ -106,7 +106,7 @@ $conn->close();
                 <input type="password" id="login-password" name="password" required>
             </div>
             <div class="form-actions">
-                <button class="button" id="login-submit" type="submit" disabled>Login</button>
+                <button type="submit" id="login-submit" class="button" disabled>Login</button>
             </div>
         </form>
 
