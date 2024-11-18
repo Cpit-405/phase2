@@ -85,14 +85,14 @@ function validatePassword(passwordId, confirmPasswordId, strengthFeedbackId, mat
 }
 
 // Check form validity and enable/disable submit button
-function checkFormValidity(formId, submitButtonId) {
-    const form = document.getElementById(formId);
-    const submitButton = document.getElementById(submitButtonId);
+// function checkFormValidity(formId, submitButtonId) {
+//     const form = document.getElementById(formId);
+//     const submitButton = document.getElementById(submitButtonId);
 
-    if (form && submitButton) {
-        submitButton.disabled = !form.checkValidity(); // Enable if the form is valid, disable otherwise
-    }
-}
+//     if (form && submitButton) {
+//         submitButton.disabled = !form.checkValidity(); // Enable if the form is valid, disable otherwise
+//     }
+// }
 
 // Function to focus the curser on the search bar when the key / is pressed
 function focusSearchOnSlash() {

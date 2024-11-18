@@ -4,35 +4,74 @@
 <!--Reem Alhussaini - 2105023-->
 <!--Lama Althabiti - 2112562-->
 <?php
+include 'project405.php';
+include 'Queries-405.php';
+
+$errors = [];
+$name = $email = $feedback_type = $message = ""; // Initialize variables to retain form data
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars(trim($_POST["name"]));
-    $email = htmlspecialchars(trim($_POST["email"]));
-    $feedback_type = $_POST["feedback-type"];
-    $message = htmlspecialchars(trim($_POST["message"]));
+
+    // Validate name
+    if (empty($_POST["name"])) {
+        $errors[] = "Name is required.";
+    } else {
+        $name = htmlspecialchars(trim($_POST["name"]));
+        if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+            $errors[] = "Only letters and white space allowed in name.";
+        }
+    }
+
+    // Validate email
+    if (empty($_POST["email"])) {
+        $errors[] = "Email is required.";
+    } else {
+        $email = htmlspecialchars(trim($_POST["email"]));
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Invalid email format.";
+        }
+    }
+
+    // Validate feedback type
+    $allowed_types = ["suggestion", "complaint", "compliment"];
+    if (empty($_POST["feedback-type"]) || !in_array($_POST["feedback-type"], $allowed_types)) {
+        $errors[] = "Invalid feedback type.";
+    } else {
+        $feedback_type = $_POST["feedback-type"];
+    }
+
+    // Validate message
+    if (empty($_POST["message"])) {
+        $errors[] = "Message is required.";
+    } else {
+        $message = htmlspecialchars(trim($_POST["message"]));
+    }
 
     // Database details
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "";
     $dbname = "Retro_devices";
 
-    // Save to database
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    // If no errors, save to database
+    if (empty($errors)) {
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $stmt = $conn->prepare("INSERT INTO Feedback (name, email, feedback_type, message) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $name, $email, $feedback_type, $message);
+
+        if ($stmt->execute()) {
+            $success_message = "Feedback submitted successfully!";
+        } else {
+            $errors[] = "Failed to submit feedback.";
+        }
+
+        $stmt->close();
+        $conn->close();
     }
-
-    $stmt = $conn->prepare("INSERT INTO Feedback (name, email, feedback_type, message) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $name, $email, $feedback_type, $message);
-
-    if ($stmt->execute()) {
-        $success_message = "Feedback submitted successfully!";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>
 
@@ -127,32 +166,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <!-- ------------3rd section--------------------- -->
       
-    <!-- Feedback Section -->
-    <section id="feedback" class="feedback-section">
-        <h2>Give Us Your Feedback</h2>
-        <p>Your feedback helps us improve. Please fill out the form below.</p>
+      <section id="feedback" class="feedback-section">
+        <h2>Feedback</h2>
 
-        <form class="feedback-form" id="feedback-form" oninput="checkFormValidity('feedback-form', 'feedback-submit')" method="POST">
+        <form class="feedback-form" id="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '#feedback'; ?>" method="POST">
+       
             <div class="form-group">
-                <label for="feedback-email">Email</label>
-                <input type="email" id="feedback-email" name="email" required oninput="validateEmail('feedback-email', 'feedback-email-feedback')">
-                <span id="feedback-email-feedback"></span>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" onfocus="focusFunction(id)" onblur="blurFunction(id)"  value="<?php echo htmlspecialchars($name); ?>">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" onfocus="focusFunction(id)" onblur="blurFunction(id)"  value="<?php echo htmlspecialchars($email); ?>">
             </div>
             <div class="form-group">
                 <label for="feedback-type">Feedback Type</label>
-                <select id="feedback-type" name="feedback-type" required>
+                <select id="feedback-type" name="feedback-type" onfocus="focusFunction(id)" onblur="blurFunction(id)" >
                     <option value="">Select...</option>
-                    <option value="suggestion">Suggestion</option>
-                    <option value="complaint">Complaint</option>
-                    <option value="compliment">Compliment</option>
+                    <option value="suggestion" <?php if ($feedback_type == "suggestion") echo "selected"; ?>>Suggestion</option>
+                    <option value="complaint" <?php if ($feedback_type == "complaint") echo "selected"; ?>>Complaint</option>
+                    <option value="compliment" <?php if ($feedback_type == "compliment") echo "selected"; ?>>Compliment</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="message">Message</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
+                <textarea id="message" name="message" rows="4" onfocus="focusFunction(id)" onblur="blurFunction(id)" ><?php echo htmlspecialchars($message); ?></textarea>
             </div>
+                     
+            <!-- Display success or error messages -->
+
+           <?php 
+           
+             if (!empty($success_message)) {
+                echo "<div style='color:green;'>" . htmlspecialchars($success_message) . "</div>";
+            }
+           
+            if (!empty($errors)) {
+                echo "<div style='color: red; text-align: left;'>"; 
+                foreach ($errors as $error) {
+                    echo htmlspecialchars($error) . "<br>"; 
+                }
+                echo "</div>";
+            }
+            ?>
             <div class="form-actions">
-                <button type="submit" id="feedback-submit" class="submit-button" disabled>Submit Feedback</button>
+                <button type="submit" class="submit-button">Submit Feedback</button>
                 <button type="reset" class="reset-button">Reset</button>
             </div>
         </form>
