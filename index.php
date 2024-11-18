@@ -4,8 +4,8 @@
 <!--Reem Alhussaini - 2105023-->
 <!--Lama Althabiti - 2112562-->
 <?php
-include 'project405.php';
-include 'Queries-405.php';
+include '/Applications/MAMP/htdocs/phase2/project405.php';
+include '/Applications/MAMP/htdocs/phase2/Queries-405.php';
 
 $errors = [];
 $name = $email = $feedback_type = $message = ""; // Initialize variables to retain form data
