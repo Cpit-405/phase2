@@ -1,5 +1,4 @@
-// TASK1
-// a: add Focus on form fields
+
 function focusFunction(id) {
     if (id == "name") {
         document.getElementById(id).placeholder = "John";
@@ -112,51 +111,50 @@ focusSearchOnSlash();
 
 
 // Confirmation on form submission and reset
-function init() {
-    const form = document.getElementById("form");
-    const submitButton = document.getElementById("feedback-submit");
+function feedbackConfirm(){
+    var form = document.getElementById("form");
 
     if (form) {
-        form.addEventListener("submit", function (event) {
-            const isConfirmed = confirm("Are You Sure You Want To Send Your Feedback?");
-            if (!isConfirmed) {
-                event.preventDefault();
-            }
-        });
+      form.addEventListener("submit", function (event) {
+        const isConfirmed = confirm(
+          "Are You Sure You Want To Send Your Feedback?"
+        );
+        if (!isConfirmed) {
+          event.preventDefault();
+        }
+      });
 
-        form.addEventListener("reset", function (event) {
-            const isConfirmed = confirm("Are you sure you want to reset the form?");
-            if (!isConfirmed) {
-                event.preventDefault();
-            } else {
-                document.getElementById("feedback-email-feedback").textContent = ""; // Clear feedback messages
-            }
-        });
+      form.addEventListener("reset", function (event) {
+        const isConfirmed = confirm("Are you sure you want to reset the form?");
+        if (!isConfirmed) {
+          event.preventDefault();
+        }
+      });
     }
-    // For signup form
-    const signupForm = document.getElementById("signup-form");
-    const signupSubmitButton = document.getElementById("signup-submit");
+}
 
+function signupConfirm(){
+    var signupForm = document.getElementById("signup-form");
     if (signupForm) {
         signupForm.addEventListener("submit", function (event) {
-            const isConfirmed = confirm("Do you want to proceed with the signup?");
+            const isConfirmed = confirm("Do you want to proceed with the sign-up?");
             if (!isConfirmed) {
                 event.preventDefault();
             }
         });
 
-        form.addEventListener("reset", function (event) {
-            var isConfirmed = confirm("Are you sure you want to reset the form?");
+        signupForm.addEventListener("reset", function (event) {
+            const isConfirmed = confirm("Are you sure you want to reset the sign-up form?");
             if (!isConfirmed) {
                 event.preventDefault();
-            } else {
-                document.getElementById("name").value = "";
-                document.getElementById("email").value = "";
-                document.getElementById("feedback-type").value = "";
-                document.getElementById("message").value = "";
-            }
+            } 
         });
-    }
+}
+}
+function init() {
+   
+feedbackConfirm();
+  signupConfirm();
 }
 
 // Initialize validation logic on page load

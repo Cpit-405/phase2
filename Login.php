@@ -76,7 +76,7 @@ $conn->close();
                     <li><a href="Atari.php">Atari</a></li>
                 </ul>
             </li>
-            <li><a href="#feedback">Feedback</a></li>
+            <li><a href="index.php#feedback">Feedback</a></li>
             <li id="userProfile">
                 <a href="Login.php#login"><i class="bi bi-person-circle"></i></a>
             </li>
