@@ -6,7 +6,7 @@ function focusFunction(id) {
 
     }
     if (id == "email") {
-        document.getElementById(id).placeholder = "emaple@example.com";
+        document.getElementById(id).placeholder = "example@example.com";
     }
     if (id == "message") {
         document.getElementById(id).placeholder = "Feel Free to write your feedback!";
