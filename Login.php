@@ -15,36 +15,52 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Check if user exists
-    $sql = "SELECT * FROM Users WHERE User_email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-
-    if ($user) {
-        // User exists, validate password
-        if ($password === $user["password"]) {
-            session_start();
-            session_regenerate_id();
-            $_SESSION["user_id"] = $user["id"];
-            header("Location: index.php");
-            exit;
-        } else {
-            // Invalid password
-            $is_invalid = true;
-        }
+    // Validate email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $is_invalid = true;
     } else {
-        // User does not exist, redirect to sign-up page
-        header("Location: SignUp.php?error=Account not found, please sign up");
-        exit;
-    }
+        // Validate password strength
+        $password_pattern = '/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/';
+        if (!preg_match($password_pattern, $password)) {
+            $is_invalid = true;
+        } else {
+            // Check if user exists
+            $sql = "SELECT * FROM Users WHERE User_email = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
 
-    $stmt->close();
+            if ($user) {
+                // User exists, validate password
+                if ($password === $user["password"]) {
+                    session_start();
+                    session_regenerate_id();
+                    $_SESSION["user_id"] = $user["id"];
+                    header("Location: index.php");
+                    exit;
+                } else {
+                    // Invalid password
+                    $is_invalid = true;
+                }
+            } else {
+                // User does not exist, redirect to sign-up page
+                header("Location: SignUp.php?error=Account not found, please sign up");
+                exit;
+            }
+
+            $stmt->close();
+        }
+    }
 }
 
 $conn->close();
+?>
+
+<?php
+$error_message = isset($_GET['error']) ? htmlspecialchars($_GET['error']) : null;
+$success_message = isset($_GET['success']) ? htmlspecialchars($_GET['success']) : null;
 ?>
 
 <!DOCTYPE html>
@@ -94,21 +110,26 @@ $conn->close();
         <h2 style="text-align: center;">Login</h2>
         
         <form class="form-form" id="login-form" method="POST">
-            <?php if ($is_invalid): ?>
-                <em>Invalid Login</em>
-            <?php endif; ?>
+        <?php if ($error_message): ?>
+        <p style="color: red; text-align: center;"><?= $error_message ?></p>
+    <?php elseif ($is_invalid): ?>
+        <em style="color: red; text-align: center;">Invalid Login. Please check your email, password, or password strength.</em>
+    <?php endif; ?>
+    <?php if ($success_message): ?>
+    <p style="color: green; text-align: center;"><?= $success_message ?></p>
+    <?php endif; ?>
             <div class="form-group">
                 <label for="login-email">Email:</label>
                 <input type="email" name="email" id="email"
                  value="<?= htmlspecialchars($_POST["email"] ?? "") ?>" onfocus="focusFunction(id) ">
-                 </div>
+            </div>
             
             <div class="form-group">
                 <label for="login-password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <div class="form-actions">
-                <button type="submit" id="submit" class="button" >Login</button>
+                <button type="submit" id="submit" class="button">Login</button>
             </div>
         </form>
 
@@ -122,3 +143,4 @@ $conn->close();
     </footer>
 </body>
 </html>
+

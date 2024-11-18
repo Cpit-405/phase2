@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,8 +70,7 @@
             </div>
 
             <div class="form-actions">
-                <button type="submit" id="signup-submit" class="button" disabled>Sign Up</button>
-                <button type="reset" class="button">Reset</button>
+                <button type="submit" id="signup-submit" class="button">Sign Up</button>
             </div>
         </form>
 

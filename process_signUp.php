@@ -39,8 +39,8 @@ if (empty($email)) {
     $checkStmt->store_result();
 
     if ($checkStmt->num_rows > 0) {
-        // Redirect to login page if the user already exists
-        header("Location: Login.php");
+        // User already exists
+        header("Location: Login.php?error=You already have an account. Please log in.");
         exit();
     }
     $checkStmt->close();
@@ -56,7 +56,7 @@ if (empty($email)) {
     $stmt->bind_param("ss", $email, $pass);
     
     if ($stmt->execute()) {
-        header("Location: Login.php");
+        header("Location: Login.php?success=Account created successfully. Please log in.");
         exit();
     } else {
         die("Database error: " . $conn->error);
