@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Database details
     $servername = "localhost";
     $username = "root";
-    $password = "";
+    $password = "root";
     $dbname = "Retro_devices";
 
     // If no errors, save to database

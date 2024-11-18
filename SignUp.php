@@ -47,7 +47,12 @@
     </nav>
 
     <section id="signUp" class="form-section">
-        <h2 style="text-align: center;">Sign up</h2>
+    <h2 style="text-align: center;">Sign up</h2>
+            <form class="form-form" action="process_signUp.php" method="POST" novalidate>
+                <?php if (isset($_GET['error'])) { ?>
+                    <p class="error"> <?php echo $_GET['error']; ?> </p>
+                <?php } ?> 
+                
         <form class="form-form" id="signup-form" action="process_signUp.php"  method="POST">
             <div class="form-group">
                 <label for="signup-email">Email</label>

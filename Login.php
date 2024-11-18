@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root";
 $dbname = "Retro_devices";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -99,8 +99,10 @@ $conn->close();
             <?php endif; ?>
             <div class="form-group">
                 <label for="login-email">Email:</label>
-                <input type="email" id="email" name="email" onfocus = "focusFunction(id)" onblur="blurFunction(id)" required>
-            </div>
+                <input type="email" name="email" id="email"
+                 value="<?= htmlspecialchars($_POST["email"] ?? "") ?>" onfocus="focusFunction(id) ">
+                 </div>
+            
             <div class="form-group">
                 <label for="login-password">Password:</label>
                 <input type="password" id="password" name="password" required>
