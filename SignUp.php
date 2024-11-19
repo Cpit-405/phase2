@@ -37,10 +37,12 @@
             </li>
     
             <li>
-                <div class="search-container">
-                    <input type="text" id="search-bar" class="search-input" placeholder="Type / to search">
-                    <button class="searchbutton"><i class="bi bi-search"></i></button>
-                </div>
+                <form method="post" action="search_result.php">
+                    <div class="search-container">
+                        <input type="text" id="search-bar" class="search-input" name="search" placeholder="Type / to search">
+                        <button type="submit" name="submit" class="searchbutton"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
             </li>
         </ul>
     </nav>
