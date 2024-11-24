@@ -4,8 +4,8 @@
 <!--Reem Alhussaini - 2105023-->
 <!--Lama Althabiti - 2112562-->
 <?php
-include '/Applications/MAMP/htdocs/phase2/project405.php';
-include '/Applications/MAMP/htdocs/phase2/Queries-405.php';
+include 'project405.php';
+include 'Queries-405.php';
 
 $errors = [];
 $name = $email = $feedback_type = $message = ""; // Initialize variables to retain form data
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Database details
     $servername = "localhost";
     $username = "root";
-    $password = "root";
+    $password = "";
     $dbname = "Retro_devices";
 
     // If no errors, save to database
@@ -153,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="category">
                     <?php
                     echo '<a href="' . $row['category_name'] . '.php">';
-                    echo '<img src="images/' . $row['img1'] . '" alt="' . $row['category_name'] . '">';
+                    echo '<img src="images/' . $row['img1'] . '" alt="' .  $row['category_name'] . '" class="category-img">';
                     echo '<h3>' . $row['category_name'] . '</h3>';
                     echo '</a>';
                     echo '<p>' . $row['shortDescription'] . '</p>';

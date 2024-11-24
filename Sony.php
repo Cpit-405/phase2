@@ -1,5 +1,5 @@
 <?php
-include '/Applications/MAMP/htdocs/phase2/Queries-405.php';
+include 'Queries-405.php';
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +84,7 @@ if ($resultSonypage->num_rows > 0) {
             echo "<h3> Device " . $index . " : </h3>";
             echo "<ol><li>" . $row['device_name'] . "</li>";
             echo "<ul><li><p>Description: " . $row['description'] . "</p></li></ul></ol>";
-            echo "</td><td><img src='images/" . $row['device_image'] . "' alt='" . $row['device_name'] . "'></td></tr></thead>";
+            echo "</td><td><img src='images/" . $row['device_image'] . "' alt='" . $row['device_name'] . "' class='category-img'></td></tr></thead>";;
             echo "<tbody><tr><td colspan='4'>";
             
             $current_device_name = $row['device_name'];
@@ -92,7 +92,7 @@ if ($resultSonypage->num_rows > 0) {
         }
         if (!empty($row['game_name'])) {
         echo "<div class='image-container'>";
-        echo "<img src='images/" . $row['game_image'] . "' alt='" . $row['game_name'] . "'>";
+        echo "<img src='images/" . $row['game_image'] . "' alt='" . $row['game_name'] . "' class='game-img'>";
         echo "<p>" . $row['game_name'] . "</p></div>";
     }
 }

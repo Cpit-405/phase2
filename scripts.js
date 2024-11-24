@@ -83,22 +83,13 @@ function validatePassword(passwordId, confirmPasswordId, strengthFeedbackId, mat
     }
 }
 
-// Check form validity and enable/disable submit button
-// function checkFormValidity(formId, submitButtonId) {
-//     const form = document.getElementById(formId);
-//     const submitButton = document.getElementById(submitButtonId);
-
-//     if (form && submitButton) {
-//         submitButton.disabled = !form.checkValidity(); // Enable if the form is valid, disable otherwise
-//     }
-// }
 
 // Function to focus the curser on the search bar when the key / is pressed
 function focusSearchOnSlash() {
     document.addEventListener("keydown", function (event) {
         // Check if the pressed key is `/` and if no input field is already focused
-        if (event.key === "/" && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA") {
-            event.preventDefault(); // Prevent the default action of `/` if necessary
+        if (event.key === "/" && document.activeElement.tagName !== "INPUT" 
+            && document.activeElement.tagName !== "TEXTAREA") {
             const searchInput = document.getElementById("search-bar");
             if (searchInput) {
                 searchInput.focus(); // Set focus to the search bar
@@ -108,6 +99,32 @@ function focusSearchOnSlash() {
 }
 
 focusSearchOnSlash();
+
+
+function addHoverEffectToImages(selectors) {
+
+    document.addEventListener("DOMContentLoaded", () => {
+        selectors.forEach((selector) => {
+            const images = document.querySelectorAll(selector);
+            console.log(`Images found for selector "${selector}":`, images.length);
+
+            images.forEach((img) => {
+                img.addEventListener("mouseover", () => {
+                    console.log(`Hover in on selector "${selector}":`, img);
+                    img.style.transform = "scale(1.2)";
+                    img.style.transition = "transform 0.3s ease";
+                });
+
+                img.addEventListener("mouseout", () => {
+                    console.log(`Hover out on selector "${selector}":`, img);
+                    img.style.transform = "scale(1)";
+                });
+            });
+        });
+    });
+}
+
+addHoverEffectToImages([".category-img", ".game-img"]);
 
 
 // Confirmation on form submission and reset
